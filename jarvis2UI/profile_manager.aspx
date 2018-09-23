@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="profile_manager.aspx.cs" Inherits="jarvis2UI.profile_manager" %>
+﻿<%@ Page Title="Profile Manager" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="profile_manager.aspx.cs" Inherits="jarvis2UI.profile_manager" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="">            
 

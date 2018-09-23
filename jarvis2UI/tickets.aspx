@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="tickets.aspx.cs" Inherits="jarvis2UI.tickets" %>
+﻿<%@ Page Title="Tickets" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="tickets.aspx.cs" Inherits="jarvis2UI.tickets" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
 					<div class="col-md-9 col-sm-9 col-xs-9">
