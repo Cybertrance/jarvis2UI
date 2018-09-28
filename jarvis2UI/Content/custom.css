@@ -4271,3 +4271,12 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     background-color: #ffff !important;
 }
 /** /bootstrap-datetimepicker **/
+
+/**CUSTOM**/
+.roster-event {
+    height: 25px;
+    padding: 3px;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(125,125,125,1);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(125,125,125,1);
+    box-shadow: 2px 2px 5px 0px rgba(125,125,125,1);
+}

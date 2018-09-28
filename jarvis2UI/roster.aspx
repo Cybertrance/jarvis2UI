@@ -33,59 +33,37 @@
     </div>
 
     <!-- calendar modal -->
-    <div id="CalendarRosterModalView" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+
+    <div id="CalendarRosterModalView" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
             <div class="modal-content">
+
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="myModalLabel">Roster Details</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="rosterModalLabelTitle">Roster Details</h4>
                 </div>
                 <div class="modal-body">
-                    <div id="testmodal" style="padding: 5px 20px;">
-                        <form id="antoform" class="form-horizontal calender" role="form">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Shift 1</label>
-                                <div class="col-sm-9">
-                                    <ul class="list-unstyled timeline widget">
-                                        <li>
-                                            <div class="block">
-                                                <div class="block_content">
-                                                    <h2 class="title">
-                                                        <a>Agent #1</a>
-                                                    </h2>
-                                                    <div class="byline">
-                                                        <span>.NET / MS Tech.</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                    <div class="col-sm-12">
+                        <label id="rosterModalLabel" class="col-sm-3">Shift 1</label>
+                    <div class="col-sm-9">
+                        <ul class="list-unstyled timeline widget">
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <a><i class="fa fa-circle red"></i>Agent #1</a>
+                                        </h2>
+                                        <div class="byline">
+                                            <span>.NET / MS Tech.</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Shift 2</label>
-                                <div class="col-sm-9">
-                                    <ul class="list-unstyled timeline widget">
-                                        <li>
-                                            <div class="block">
-                                                <div class="block_content">
-                                                    <h2 class="title">
-                                                        <a>Agent #2</a>
-                                                    </h2>
-                                                    <div class="byline">
-                                                        <span>Customer Support</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </form>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>

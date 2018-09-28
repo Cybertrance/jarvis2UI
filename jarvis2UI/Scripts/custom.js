@@ -943,8 +943,6 @@ function init_compose() {
 /* CALENDAR */
 
 function init_calendar() {
-    var redDays = ["2018-09-12", "2018-09-13", "2018-09-19", "2018-09-12", "2018-09-02", "2018-09-12", "2018-09-30"];
-    var yellowDays = ["2018-06-12", "2018-09-13"];
 
     if (typeof ($.fn.fullCalendar) === 'undefined') { return; }
     console.log('init_calendar');
@@ -961,67 +959,61 @@ function init_calendar() {
             left: 'prev,next today',
             center: 'title',
         },
-        selectable: true,
-        selectHelper: true,
-        select: function (start, end, allDay) {
-            $('#fc_create').click();
-
-            started = start;
-            ended = end;
-
-            $(".antosubmit").on("click", function () {
-                var title = $("#title").val();
-                if (end) {
-                    ended = end;
-                }
-
-                categoryClass = $("#event_type").val();
-
-                if (title) {
-                    calendar.fullCalendar('renderEvent', {
-                        title: title,
-                        start: started,
-                        end: end,
-                        allDay: allDay
-                    },
-                        true // make the event "stick"
-                    );
-                }
-
-                $('#title').val('');
-
-                calendar.fullCalendar('unselect');
-
-                $('.antoclose').click();
-
-                return false;
-            });
-        },
+        selectable: false,
+        selectHelper: false,
         eventClick: function (calEvent, jsEvent, view) {
-            $('#fc_edit').click();
-            $('#title2').val(calEvent.title);
-
-            categoryClass = $("#event_type").val();
-
-            $(".antosubmit2").on("click", function () {
-                calEvent.title = $("#title2").val();
-
-                calendar.fullCalendar('updateEvent', calEvent);
-                $('.antoclose2').click();
-            });
+            $('#rosterModal').click();
+            $('#rosterModalLabelTitle').text("Roster Details for " + calEvent.title);
+            $('#rosterModalLabel').text(calEvent.title);
 
             calendar.fullCalendar('unselect');
         },
-        editable: true,
+        editable: false,
         dayRender: function (date, cell) {
-            if ($.fullCalendar.moment("2018-09-12").isSame(date)) {
-                cell.css({ "background-color": "#ff6961" });
-            }
-            if ($.fullCalendar.moment("2018-09-14").isSame(date)) {
-                cell.css({ "background-color": "#fdfd96" });
-            }
+
         },
-        events: []
+        eventTextColor: "rgb(38,38,38)",
+        eventBorderColor: "rgb(0,0,0)",
+        events: function (start, end, timezone, callback) {
+
+            var startMoment = $.fullCalendar.moment(start);
+            var endMoment = $.fullCalendar.moment(end);
+
+            var events = [];
+
+            while (startMoment.isBefore(endMoment, 'day') || startMoment.isSame(endMoment, 'day')) {
+
+                // Create 3 events everyday for the 3 shifts.
+                events.push(
+                    {
+                        // Shift 1 Event.
+                        title: "India Shift 1",
+                        start: startMoment.format(),
+                        color: "rgb(198,224,180)",
+                        className: "roster-event"
+
+                    },
+                    {
+                        // Shift 2 Event.
+                        title: "India Shift 2",
+                        start: startMoment.format(),
+                        color: "rgb(248,203,173)",
+                        className: "roster-event"
+                    },
+                    {
+                        // Shift 3 Event.
+                        title: "USA Shift",
+                        start: startMoment.format(),
+                        color: "rgb(255,230,153)",
+                        className: "roster-event"
+                    }
+                );
+
+                startMoment.add(1, 'days');
+            }
+
+            if (callback) callback(events);
+        }
     });
 };
 
