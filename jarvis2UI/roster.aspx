@@ -44,8 +44,8 @@
                     </button>
                     <h4 class="modal-title" id="rosterModalLabelTitle">Roster Details</h4>
                 </div>
-                <div class="modal-body">
-                    <div class="col-sm-12">
+                <div class="modal-body" style="height:100px">
+                    <div class="col-sm-12" style="padding:5px">
                         <label id="rosterModalLabel" class="col-sm-3">Shift 1</label>
                     <div class="col-sm-9">
                         <ul class="list-unstyled timeline widget">

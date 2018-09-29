@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+using jarvis2UI.Data_Model;
 
 namespace jarvis2UI
 {
@@ -16,6 +17,10 @@ namespace jarvis2UI
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // Init DataSets
+            Application["IssueDataset"] = new IssueDataset();
+            Application["SwarmProfileDataset"] = new SwarmProfileDataset();
         }
     }
 }

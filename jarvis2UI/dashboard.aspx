@@ -156,44 +156,22 @@
               </div>
               <div class="x_content">
                 <div class="dashboard-widget-content">
-
                   <ul class="list-unstyled timeline widget">
+                      <%foreach (jarvis2UI.Data_Model.SwarmProfile profile in jarvis2UI.Data_Model.SwarmProfileDataset.Profiles.Where(x => x.SwarmGroupName == "active_swarm"))
+                          {%>
                     <li>
                       <div class="block">
                         <div class="block_content">
                           <h2 class="title">
-                            <a> <i class="fa fa-circle green"></i> Agent #1</a>
+                            <a> <i class="fa fa-circle green"></i> <%=profile.Name %></a>
                           </h2>
                           <div class="byline">
-                            <span>.NET / MS Tech.</span>
+                            <span><%=profile.TeamName %></span>
                           </div>
                         </div>
                       </div>
                     </li>
-                    <li>
-                      <div class="block">
-                        <div class="block_content">
-                          <h2 class="title">
-                            <a> <i class="fa fa-circle blue"></i> Agent #2</a>
-                          </h2>
-                          <div class="byline">
-                            <span>Java / Open Source</span>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="block">
-                        <div class="block_content">
-                          <h2 class="title">
-                            <a> <i class="fa fa-circle green"></i> Agent #3</a>
-                          </h2>
-                          <div class="byline">
-                            <span>Customer Training</span>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+                      <%} %>
                   </ul>
                 </div>
               </div>
@@ -226,30 +204,21 @@
                 <div class="dashboard-widget-content">
 
                   <ul class="list-unstyled timeline widget">
+                      <%foreach (jarvis2UI.Data_Model.SwarmProfile profile in jarvis2UI.Data_Model.SwarmProfileDataset.Profiles.Where(x => x.SwarmGroupName == "backlog_swarm"))
+                          {%>
                     <li>
                       <div class="block">
                         <div class="block_content">
                           <h2 class="title">
-                            <a> <i class="fa fa-circle red"></i> Agent #A</a>
+                            <a> <i class="fa fa-circle blue"></i> <%=profile.Name %></a>
                           </h2>
                           <div class="byline">
-                            <span>Customer Training</span>
+                            <span><%=profile.TeamName %></span>
                           </div>
                         </div>
                       </div>
                     </li>
-                    <li>
-                      <div class="block">
-                        <div class="block_content">
-                          <h2 class="title">
-                            <a> <i class="fa fa-circle red"></i> Agent #B</a>
-                          </h2>
-                          <div class="byline">
-                            <span>Customer Training</span>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+                      <%} %>
                   </ul>
                 </div>
               </div>

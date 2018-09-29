@@ -982,36 +982,33 @@ function init_calendar() {
             var events = [];
 
             while (startMoment.isBefore(endMoment, 'day') || startMoment.isSame(endMoment, 'day')) {
+                    // Create 3 events everyday for the 3 shifts.
+                    events.push(
+                        {
+                            // Shift 1 Event.
+                            title: "India Shift 1",
+                            start: startMoment.format(),
+                            color: "rgb(198,224,180)",
+                            className: "roster-event"
 
-                // Create 3 events everyday for the 3 shifts.
-                events.push(
-                    {
-                        // Shift 1 Event.
-                        title: "India Shift 1",
-                        start: startMoment.format(),
-                        color: "rgb(198,224,180)",
-                        className: "roster-event"
-
-                    },
-                    {
-                        // Shift 2 Event.
-                        title: "India Shift 2",
-                        start: startMoment.format(),
-                        color: "rgb(248,203,173)",
-                        className: "roster-event"
-                    },
-                    {
-                        // Shift 3 Event.
-                        title: "USA Shift",
-                        start: startMoment.format(),
-                        color: "rgb(255,230,153)",
-                        className: "roster-event"
-                    }
-                );
-
+                        },
+                        {
+                            // Shift 2 Event.
+                            title: "India Shift 2",
+                            start: startMoment.format(),
+                            color: "rgb(248,203,173)",
+                            className: "roster-event"
+                        },
+                        {
+                            // Shift 3 Event.
+                            title: "USA Shift",
+                            start: startMoment.format(),
+                            color: "rgb(255,230,153)",
+                            className: "roster-event"
+                        }
+                    );             
                 startMoment.add(1, 'days');
             }
-
             if (callback) callback(events);
         }
     });
@@ -1071,7 +1068,7 @@ function init_DataTables() {
         keys: true
     });
 
-    $('#datatable-responsive').DataTable();
+    
 
     $('#datatable-scroller').DataTable({
         ajax: "js/datatables/json/scroller-demo.json",
@@ -1245,6 +1242,43 @@ function init_morris_charts() {
     }
 };
 
+function init_profileTable() {
+    $('#profilemanager-datatable').DataTable();
+}
+
+$(document).ready(function () {
+    $(".ticket-open").on('click', function () {
+        $.ajax({
+            url: "updateTicketDetailsPane.ashx",
+            contentType: "application/json",
+            data: { 'ticketId': $(this).closest("tr").attr('id') },
+            success: function (data) {
+                var issueData = JSON.parse(data);
+               
+                $("#ticket-panel-title").html(issueData.Name);
+                $("#ticket-panel-desc").text(issueData.Description);
+                $("#ticket-panel-raisedby").text(issueData.RaisedBy);
+                $("#ticket-panel-raisedvia").text(issueData.RaisedVia);
+                $("#ticket-panel-assignedto").text(issueData.AssignedName);
+            },
+            //error: OnFail
+        });
+    });
+
+    $("#ticket-submit").on('click', function () {
+        alert();
+        $.ajax({
+            url: "addTicketDetails.ashx",
+            contentType: "application/json",
+            data: { 'title': $('#title').val(), 'desc': $('#desc').val() },
+            success: function () {
+                location.reload(true);
+            }
+            //error: OnFail
+        });
+    });
+});
+
 $(document).ready(function () {
     init_flot_chart();
     init_sidebar();
@@ -1262,4 +1296,5 @@ $(document).ready(function () {
     init_compose();
     init_CustomNotification();
     init_autosize();
+    init_profileTable();
 });

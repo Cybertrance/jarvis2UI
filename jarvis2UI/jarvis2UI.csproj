@@ -121,6 +121,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="addTicketDetails.ashx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="profile_manager.aspx" />
     <Content Include="roster.aspx" />
@@ -3563,10 +3564,15 @@
     <Content Include="vendors\validator\validator.js" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
-    <Content Include="Bundle.config" />
+    <Content Include="Bundle.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addTicketDetails.ashx.cs">
+      <DependentUpon>addTicketDetails.ashx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -3590,6 +3596,8 @@
     <Compile Include="dashboard.aspx.designer.cs">
       <DependentUpon>dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Data_Model\Issue.cs" />
+    <Compile Include="Data_Model\IssueDataset.cs" />
     <Compile Include="Data_Model\SwarmProfile.cs" />
     <Compile Include="Data_Model\SwarmProfileDataset.cs" />
     <Compile Include="Default.aspx.cs">
@@ -3637,6 +3645,9 @@
     </Compile>
     <Compile Include="tickets.aspx.designer.cs">
       <DependentUpon>tickets.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="updateTicketDetailsPane.ashx.cs">
+      <DependentUpon>updateTicketDetailsPane.ashx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -4489,6 +4500,7 @@
     <Content Include="vendors\validator\.gitignore" />
     <Content Include="vendors\validator\README.md" />
     <Content Include="vendors\validator\validator.jquery.json" />
+    <Content Include="updateTicketDetailsPane.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

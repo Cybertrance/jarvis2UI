@@ -16,7 +16,7 @@
                         <div class="panel">
                             <a class="panel-heading" role="tab" id="headingOne1" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1"
                                 aria-expanded="true" aria-controls="collapseOne">
-                                <h4 class="panel-title">Overdue Tickets</h4>
+                                <h4 class="panel-title">Due Tickets</h4>
                             </a>
                             <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                 <div class="panel-body">
@@ -25,81 +25,56 @@
                                             <tr>
                                                 <th style="width: 1%">Issue #</th>
                                                 <th style="width: 20%">Title</th>
-                                                <th>Team Members</th>
+                                                <th>Assigned To</th>
                                                 <th>Ticket Progress</th>
                                                 <th>Status</th>
                                                 <th style="width: 20%">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>#</td>
+                                            <%foreach(jarvis2UI.Data_Model.Issue issue in ((jarvis2UI.Data_Model.IssueDataset)Application["IssueDataset"]).Issues.Where(issue=>issue.Progress<26))
+                                                {%>
+                                            <tr id="<%=issue.IssueId %>">
+                                                <td><%=issue.IssueId %></td>
                                                 <td>
-                                                    <a>Unresponsive UI</a>
+                                                    <a><%=issue.Name %></a>
                                                     <br />
-                                                    <small>Created 01.01.2015</small>
+                                                    <small>Created <%=issue.CreatedOn.Date %></small>
                                                 </td>
                                                 <td>
                                                     <ul class="list-inline">
                                                         <li>
-                                                            <img src="images/user.png" class="avatar" alt="Avatar">
-                                                        </li>
-                                                        <li>
-                                                            <img src="images/user.png" class="avatar" alt="Avatar">
-                                                        </li>
-                                                        <li>
-                                                            <img src="images/user.png" class="avatar" alt="Avatar">
-                                                        </li>
-                                                        <li>
-                                                            <img src="images/user.png" class="avatar" alt="Avatar">
+                                                            <%
+                                                                String assignedTo;
+
+                                                                if(((jarvis2UI.Data_Model.SwarmProfileDataset)Application["SwarmProfileDataset"]).Profiles.Where(id=>id.EmpNumber == issue.AssignedTo).Count()>0)
+                                                                {
+                                                                    assignedTo = ((jarvis2UI.Data_Model.SwarmProfileDataset)Application["SwarmProfileDataset"]).Profiles.Where(id => id.EmpNumber == issue.AssignedTo).FirstOrDefault().Name;
+                                                                }
+                                                                else
+                                                                {
+                                                                    assignedTo = "Not Assigned";
+                                                                }
+                                                            %>
+                                                            <%=assignedTo %>
                                                         </li>
                                                     </ul>
                                                 </td>
                                                 <td class="project_progress">
                                                     <div class="progress progress_sm">
-                                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
+                                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<%=issue.Progress %>"></div>
                                                     </div>
-                                                    <small>57% Complete</small>
+                                                    <small><%=issue.Progress %>% Complete</small>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-success btn-xs">In Progress</button>
+                                                    <button type="button" class="btn btn-success btn-xs"><%=issue.Status %></button>
                                                 </td>
                                                 <td>
-                                                    <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>View </a>
+                                                    <button type="button" class="btn btn-primary btn-xs ticket-open"><i class="fa fa-folder"></i>View </button>
                                                     <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-check-square-o"></i>Close </a>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>#</td>
-                                                <td>
-                                                    <a>404 Error</a>
-                                                    <br />
-                                                    <small>Created 02.12.2015</small>
-                                                </td>
-                                                <td>
-                                                    <ul class="list-inline">
-                                                        <li>
-                                                            <img src="images/user.png" class="avatar" alt="Avatar">
-                                                        </li>
-                                                        <li>
-                                                            <img src="images/user.png" class="avatar" alt="Avatar">
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                                <td class="project_progress">
-                                                    <div class="progress progress_sm">
-                                                        <div class="progress-bar bg-yellow" role="progressbar" data-transitiongoal="20"></div>
-                                                    </div>
-                                                    <small>20% Complete</small>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning btn-xs">On Hold</button>
-                                                </td>
-                                                <td>
-                                                    <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>View </a>
-                                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-check-square-o"></i>Close </a>
-                                                </td>
-                                            </tr>
+                                            <%} %>
                                         </tbody>
                                     </table>
                                 </div>
@@ -198,7 +173,7 @@
         <div class="col-md-3 col-sm-3 col-xs-3">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2><i class="fa fa-align-left"></i>Ticket Description</h2>
+                    <h2 id="ticket-panel-title"><i class="fa fa-align-left"></i>Ticket Description</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -220,7 +195,7 @@
                     <!-- start project-detail sidebar -->
                     <div class="panel-body">
 
-                        <p>
+                        <p id="ticket-panel-desc">
                             UI of the application feels sluggish and Unresponsive. Many hangs in the loading screen,
 											tickets page and orders page. Please fix ASAP. Attached are docs retlated to issue.
                         </p>
@@ -229,11 +204,11 @@
                         <div class="project_detail">
 
                             <p class="title">Raised by</p>
-                            <p>Client Person #1</p>
+                            <p id="ticket-panel-raisedby">Client Person #1</p>
                             <p class="title">Raised via</p>
-                            <p>Chatbot</p>
+                            <p id="ticket-panel-raisedvia">Chatbot</p>
                             <p class="title">Assigned To</p>
-                            <p>
+                            <p id="ticket-panel-assignedto">
                                 Agent #1
                                 <br>
                                 Agent #2
@@ -244,23 +219,6 @@
                         </div>
 
                         <br />
-                        <h5>Attachments</h5>
-                        <ul class="list-unstyled project_files">
-                            <li><a href=""><i class="fa fa-file-word-o"></i>Functional-requirements.docx</a>
-                            </li>
-                            <li><a href=""><i class="fa fa-file-pdf-o"></i>UAT.pdf</a>
-                            </li>
-                            <li><a href=""><i class="fa fa-mail-forward"></i>Email-from-flatbal.mln</a>
-                            </li>
-                            <li><a href=""><i class="fa fa-picture-o"></i>Logo.png</a>
-                            </li>
-                        </ul>
-                        <br />
-
-                        <div class="text-center mtop20">
-                            <a href="#" class="btn btn-sm btn-primary">Add files</a>
-                            <a href="#" class="btn btn-sm btn-warning">Report contact</a>
-                        </div>
                     </div>
                     <!-- end project-detail sidebar -->
                 </div>
@@ -289,14 +247,14 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Ticket Description</label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control" style="height: 55px;" id="descr" name="descr"></textarea>
+                                        <textarea class="form-control" style="height: 55px;" id="desc" name="descr"></textarea>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
+                        <button type="button" id="ticket-submit" class="btn btn-default antoclose" data-dismiss="modal">Submit</button>
                     </div>
                 </div>
             </div>
