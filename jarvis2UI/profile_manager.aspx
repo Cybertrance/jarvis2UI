@@ -55,7 +55,7 @@
                                   <td><%=profile.EmailId%></td>
                                   <td><%=profile.ContactNumber%></td>
                                   <td><%=profile.TeamName%></td>
-                                  <td><%=profile.Skills%></td>
+                                  <td><%=profile.Skills.ToString()%></td>
                                   <td><%=profile.ExperienceInTeam%></td>
                                   <td><%=profile.SwarmGroupName%></td>
                                   <td><%=profile.Age%></td>

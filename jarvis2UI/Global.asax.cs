@@ -21,6 +21,7 @@ namespace jarvis2UI
             // Init DataSets
             Application["IssueDataset"] = new IssueDataset();
             Application["SwarmProfileDataset"] = new SwarmProfileDataset();
+            Application["RosterDataset"] = new RosterDataset();
         }
     }
 }

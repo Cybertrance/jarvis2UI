@@ -122,6 +122,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="addTicketDetails.ashx" />
+    <Content Include="getShiftDetails.ashx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="profile_manager.aspx" />
     <Content Include="roster.aspx" />
@@ -3598,6 +3599,8 @@
     </Compile>
     <Compile Include="Data_Model\Issue.cs" />
     <Compile Include="Data_Model\IssueDataset.cs" />
+    <Compile Include="Data_Model\Roster.cs" />
+    <Compile Include="Data_Model\RosterDataset.cs" />
     <Compile Include="Data_Model\SwarmProfile.cs" />
     <Compile Include="Data_Model\SwarmProfileDataset.cs" />
     <Compile Include="Default.aspx.cs">
@@ -3606,6 +3609,9 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="getShiftDetails.ashx.cs">
+      <DependentUpon>getShiftDetails.ashx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -3645,6 +3651,9 @@
     </Compile>
     <Compile Include="tickets.aspx.designer.cs">
       <DependentUpon>tickets.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="updateRosterDetailsModal.ashx.cs">
+      <DependentUpon>updateRosterDetailsModal.ashx</DependentUpon>
     </Compile>
     <Compile Include="updateTicketDetailsPane.ashx.cs">
       <DependentUpon>updateTicketDetailsPane.ashx</DependentUpon>
@@ -4501,6 +4510,7 @@
     <Content Include="vendors\validator\README.md" />
     <Content Include="vendors\validator\validator.jquery.json" />
     <Content Include="updateTicketDetailsPane.ashx" />
+    <Content Include="updateRosterDetailsModal.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

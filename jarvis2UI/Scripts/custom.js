@@ -966,6 +966,46 @@ function init_calendar() {
             $('#rosterModalLabelTitle').text("Roster Details for " + calEvent.title);
             $('#rosterModalLabel').text(calEvent.title);
 
+            $.ajax({
+                url: "updateRosterDetailsModal.ashx",
+                contentType: "application/json",
+                data: { 'weekNumber': $.fullCalendar.moment(calEvent.start).week(), 'shiftName': calEvent.title },
+                success: function (data) {
+                    var dataObj = JSON.parse(data);
+
+                    var agent1 = dataObj[0].split("/");
+                    var agent2 = dataObj[1].split("/");
+                    var agent3 = dataObj[2].split("/");
+                    var agent4 = dataObj[3].split("/");
+
+                    $("#roster-modal-name1").html(agent1[0]);
+                    if (IsLeavePredicted($.fullCalendar.moment(calEvent.start).week(), calEvent.title, agent1[1])) {
+                        $("#roster-modal-status1").removeClass('green');
+                        $("#roster-modal-status1").addClass('red');
+                    }
+
+                    $("#roster-modal-name2").html(agent2[0]);
+                    if (IsLeavePredicted($.fullCalendar.moment(calEvent.start).week(), calEvent.title, agent2[1])) {
+                        $("#roster-modal-status2").removeClass('green');
+                        $("#roster-modal-status2").addClass('red');
+                    }
+
+                    $("#roster-modal-name3").html(agent3[0]);
+                    if (IsLeavePredicted($.fullCalendar.moment(calEvent.start).week(), calEvent.title, agent3[1])) {
+                        $("#roster-modal-status3").removeClass('green');
+                        $("#roster-modal-status3").addClass('red');
+                    }
+
+                    $("#roster-modal-name4").html(agent4[0]);
+                    if (IsLeavePredicted($.fullCalendar.moment(calEvent.start).week(), calEvent.title, agent4[1])) {
+                        $("#roster-modal-status4").removeClass('green');
+                        $("#roster-modal-status4").addClass('red');
+                    }
+                    
+                }
+                //error: OnFail
+            });
+
             calendar.fullCalendar('unselect');
         },
         editable: false,
@@ -1013,6 +1053,15 @@ function init_calendar() {
         }
     });
 };
+
+function IsLeavePredicted(weekNo, shiftName, empId) {
+    
+    for (i = 0; i < PREDICTEDLEAVE_STORE.length; i++) {
+        if (PREDICTEDLEAVE_STORE[i].shiftName == shiftName && PREDICTEDLEAVE_STORE[i].weekNo == weekNo && PREDICTEDLEAVE_STORE[i].empId == empId) {
+            return true;
+        }
+    }
+}
 
 /* DATA TABLES */
 
@@ -1266,7 +1315,6 @@ $(document).ready(function () {
     });
 
     $("#ticket-submit").on('click', function () {
-        alert();
         $.ajax({
             url: "addTicketDetails.ashx",
             contentType: "application/json",
@@ -1277,6 +1325,53 @@ $(document).ready(function () {
             //error: OnFail
         });
     });
+});
+
+//Roster Script
+var PREDICTEDLEAVE_STORE = [];
+
+$(document).ready(function () {
+
+    if ($('#calendar').length) {
+
+        $.ajax({
+            url: "http://127.0.0.1:9898/myapi/v1.0/getPredictions/leaves",
+            type:'GET',
+            contentType: "application/json",
+            success: function (data) {
+                var dataObj = JSON.parse(data);
+
+                for (i = 0; i < dataObj.length; i++) {
+
+                    if (dataObj[i].predicted == 'true') {
+
+                        $.ajax({
+                            url: "getShiftDetails.ashx",
+                            contentType: "application/json",
+                            data: { 'empId': dataObj[i].EmployeeID, 'weekNo': dataObj[i].week },
+                            success: function (shiftName) {
+
+                                var eventsToRed = $('#calendar').fullCalendar('clientEvents', function (evt) {
+                                    return evt.title == shiftName && $.fullCalendar.moment(evt.start).week()==dataObj[i].week;
+                                });
+
+                                for (i = 0; i < eventsToRed.length; i++) {
+
+                                    eventsToRed[i].className = 'roster-event-red-border';
+                                    $('#calendar').fullCalendar('updateEvent', eventsToRed[i]);
+
+                                    PREDICTEDLEAVE_STORE.push({ 'shiftName': shiftName, 'weekNo': dataObj[i].week, 'empId': dataObj[i].EmployeeID });
+                                }
+
+                                alert(events.length);
+                            }
+                            //error: OnFail
+                        });
+                    }
+                }
+            }
+        });
+    }
 });
 
 $(document).ready(function () {

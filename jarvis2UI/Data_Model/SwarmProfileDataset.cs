@@ -9,7 +9,7 @@ namespace jarvis2UI.Data_Model
 {
     public class SwarmProfileDataset
     {
-        //static String DATASETFILENAME = @"C:\JarvisDatasets\SwarmProfilesDataset.xml";
+        //static String DATASETFILENAME = System.Web.HttpRuntime.AppDomainAppPath + @"\JarvisDatasets\SwarmProfilesDataset.xml";
         private List<SwarmProfile> profiles;
 
         public List<SwarmProfile> Profiles
@@ -29,7 +29,7 @@ namespace jarvis2UI.Data_Model
 
             //if (File.Exists(DATASETFILENAME))
             //{
-            //   // DeSerializeDataset();
+            //    DeSerializeDataset();
             //}
             //else
             //{
@@ -59,7 +59,7 @@ namespace jarvis2UI.Data_Model
             Profiles.Add(new SwarmProfile { EmpNumber = 117989, Name = "Bhatnagar Aayushi ", EmailId = "bhatnagar.bhatnagar@cg.com", ContactNumber = 9743534246, TeamName = "Dedup", Skills = new List<string> { "datapath", "controlpath", "devtest" }, ExperienceInTeam = 6, SwarmGroupName = "active_swarm", Age = 41, IsMarried = true, NumberOfChildren = 1, LeavesEntitled = 10 });
         }
 
-        //private static void SerializeDataset()
+        //private void SerializeDataset()
         //{
         //    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<SwarmProfile>));
         //    TextWriter textWriter = new StreamWriter(DATASETFILENAME);
@@ -67,7 +67,7 @@ namespace jarvis2UI.Data_Model
         //    textWriter.Close();
         //}
 
-        //private static void DeSerializeDataset()
+        //private void DeSerializeDataset()
         //{
         //    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<SwarmProfile>));
         //    TextReader textReader = new StreamReader(DATASETFILENAME);

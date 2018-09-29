@@ -44,7 +44,7 @@
                     </button>
                     <h4 class="modal-title" id="rosterModalLabelTitle">Roster Details</h4>
                 </div>
-                <div class="modal-body" style="height:100px">
+                <div class="modal-body" style="height:260px">
                     <div class="col-sm-12" style="padding:5px">
                         <label id="rosterModalLabel" class="col-sm-3">Shift 1</label>
                     <div class="col-sm-9">
@@ -53,11 +53,35 @@
                                 <div class="block">
                                     <div class="block_content">
                                         <h2 class="title">
-                                            <a><i class="fa fa-circle red"></i>Agent #1</a>
+                                            <i id="roster-modal-status1" class="fa fa-circle green"></i> <span id="roster-modal-name1"> </span>
                                         </h2>
-                                        <div class="byline">
-                                            <span>.NET / MS Tech.</span>
-                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <i id="roster-modal-status2" class="fa fa-circle green"></i> <span id="roster-modal-name2"> </span>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <i id="roster-modal-status3" class="fa fa-circle green"></i> <span id="roster-modal-name3"> </span>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <i id="roster-modal-status4" class="fa fa-circle green"></i> <span id="roster-modal-name4"> </span>
+                                        </h2>
                                     </div>
                                 </div>
                             </li>
