@@ -4274,7 +4274,7 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 
 /**CUSTOM**/
 .roster-event {
-    height: 25px;
+    height: 20px;
     padding: 3px;
     -webkit-box-shadow: 2px 2px 5px 0px rgba(125,125,125,1);
     -moz-box-shadow: 2px 2px 5px 0px rgba(125,125,125,1);
@@ -4282,10 +4282,9 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 }
 
 .roster-event-red-border {
-    height: 25px;
+    height: 20px;
     padding: 3px;
-    border-color:darkred;
-    border:1px solid;
+    border:2px solid darkred;
     -webkit-box-shadow: 2px 2px 5px 0px rgba(125,125,125,1);
     -moz-box-shadow: 2px 2px 5px 0px rgba(125,125,125,1);
     box-shadow: 2px 2px 5px 0px rgba(125,125,125,1);

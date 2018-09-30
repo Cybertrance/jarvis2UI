@@ -40,7 +40,7 @@ namespace jarvis2UI
 
         public void ProcessDescription(String desc)
         {
-            const String filePath = @"C:\jarvis2UI\jarvis2UI\Scripts\wekapredict\jarNewDefect.jarvis";
+            const String filePath = @"C:\jarvis2\Scripts\wekapredict\jarNewDefect.jarvis";
             
             // Write the ticket description to the file.
             // Check if file already exists. If yes, delete it. 

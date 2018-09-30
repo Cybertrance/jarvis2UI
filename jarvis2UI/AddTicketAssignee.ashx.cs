@@ -32,9 +32,8 @@ namespace jarvis2UI
                     int randomIndex = rnd.Next(matchingTeam.Count);
                     assignedAgent = matchingTeam[randomIndex].EmpNumber;
 
-                    foundIssue.AssignedTo = assignedAgent;
-                    foundIssue.Progress = 30;
-
+                    ((IssueDataset)context.Application["IssueDataset"]).Issues.Where(i => i.IssueId == issueNumber).FirstOrDefault().AssignedTo = assignedAgent;
+                    ((IssueDataset)context.Application["IssueDataset"]).Issues.Where(i => i.IssueId == issueNumber).FirstOrDefault().Progress = 30;
                 }
 
             }

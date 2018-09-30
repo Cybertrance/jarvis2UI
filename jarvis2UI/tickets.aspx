@@ -32,7 +32,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <%foreach(jarvis2UI.Data_Model.Issue issue in ((jarvis2UI.Data_Model.IssueDataset)Application["IssueDataset"]).Issues.Where(issue=>issue.Progress<26))
+                                            <%foreach(jarvis2UI.Data_Model.Issue issue in ((jarvis2UI.Data_Model.IssueDataset)Application["IssueDataset"]).Issues.Where(issue=>issue.Progress<50))
                                                 {%>
                                             <tr id="<%=issue.IssueId %>">
                                                 <td><%=issue.IssueId %></td>
@@ -76,11 +76,11 @@
                                                         {
                                                             button = "btn-info";
                                                         } %>
-                                                    <button type="button" class="btn <%=button %> btn-xs"><%=issue.Status %></button>
+                                                    <button type="button" class="btn <%=button %> btn-xs"><%=issue.Progress >= 26 ? "Assigned" : "Logged"%></button>
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary btn-xs ticket-open"><i class="fa fa-folder"></i>View </button>
-                                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-check-square-o"></i>Close </a>
+                                                    
                                                 </td>
                                             </tr>
                                             <%} %>
@@ -133,7 +133,7 @@
                                                 </td>
                                                 <td>
                                                     <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>View </a>
-                                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-check-square-o"></i>Close </a>
+                                                    
                                                 </td>
                                             </tr>
                                             <tr>
@@ -161,7 +161,7 @@
                                                 </td>
                                                 <td>
                                                     <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>View </a>
-                                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-check-square-o"></i>Close </a>
+                                                    
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -235,26 +235,24 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="modal-title" id="myModalLabel">New Ticket</h4>
                     </div>
-                    <div class="modal-body">
-                        <div id="testmodal" style="padding: 5px 20px;">
+                    <div class="modal-body" style="height:180px">
+                        
                             <form id="antoform" class="form-horizontal calender" role="form">
-                                <div class="form-group">
+                                <div class="form-group" style="padding: 10px;">
                                     <label class="col-sm-3 control-label">Ticket Title</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="title" name="title">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="padding: 10px;">
                                     <label class="col-sm-3 control-label">Ticket Description</label>
                                     <div class="col-sm-9">
                                         <textarea class="form-control" style="height: 55px;" id="desc" name="descr"></textarea>
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="ticket-submit" class="btn btn-default antoclose" data-dismiss="modal">Submit</button>
+                       
+                        <button type="button" id="ticket-submit" class="btn btn-default antoclose pull-right" style="margin-top:15px; margin-right:19px" data-dismiss="modal">Submit</button>
                     </div>
                 </div>
             </div>
