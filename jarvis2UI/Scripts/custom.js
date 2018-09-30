@@ -1018,10 +1018,11 @@ function init_calendar() {
 
             var startMoment = $.fullCalendar.moment(start);
             var endMoment = $.fullCalendar.moment(end);
+            var sept = $.fullCalendar.moment("2018-09-29T05:55:03+05:30");
 
             var events = [];
 
-            while (startMoment.isBefore(endMoment, 'day') || startMoment.isSame(endMoment, 'day')) {
+            while (startMoment.isAfter(sept ,'day') && (startMoment.isBefore(endMoment, 'day') || startMoment.isSame(endMoment, 'day'))) {
                     // Create 3 events everyday for the 3 shifts.
                     events.push(
                         {
@@ -1315,12 +1316,37 @@ $(document).ready(function () {
     });
 
     $("#ticket-submit").on('click', function () {
+        var issueNumber;
+
         $.ajax({
             url: "addTicketDetails.ashx",
             contentType: "application/json",
             data: { 'title': $('#title').val(), 'desc': $('#desc').val() },
-            success: function () {
+            success: function (issueId) {
+                issueNumber = issueId;
+
                 location.reload(true);
+
+                $.ajax({
+                    url: "http://127.0.0.1:9898/myapi/v1.0/getPredictions/defectCategory",
+                    type: 'GET',
+                    contentType: "application/json",
+                    success: function (data) {
+
+                        dataObj = JSON.parse(data);
+
+                        $.ajax({
+                            url: "AddTicketAssignee.ashx",
+                            contentType: "application/json",
+                            data: { 'issueNumber': issueNumber, 'team': dataObj["Predicted Module"] },
+                            success: function () {
+                                location.reload(true);
+                            }
+                            //error: OnFail
+                        });
+                    }
+                    //error: OnFail
+                });
             }
             //error: OnFail
         });
@@ -1348,7 +1374,7 @@ $(document).ready(function () {
                         $.ajax({
                             url: "getShiftDetails.ashx",
                             contentType: "application/json",
-                            data: { 'empId': dataObj[i].EmployeeID, 'weekNo': dataObj[i].week },
+                            data: { 'empId': dataObj[i]["Employee ID"], 'weekNo': dataObj[i].week },
                             success: function (shiftName) {
 
                                 var eventsToRed = $('#calendar').fullCalendar('clientEvents', function (evt) {

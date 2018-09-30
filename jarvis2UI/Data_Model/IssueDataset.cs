@@ -26,7 +26,7 @@ namespace jarvis2UI.Data_Model
         {
             Issues.Clear();
 
-            Issues.Add(new Issue { IssueId = 1, Name = "TestIsssue", Description = "Desc", AssignedTo = 32002, Progress = 10, RaisedBy = "System", RaisedVia = "Console" });
+            Issues.Add(new Issue { IssueId = 1, Name = "UI Issues", Description = "The UI is slow and sluggish, there are frequent freezez and crashes after the latest update.", AssignedTo = 32002, Progress = 10, RaisedBy = "System", RaisedVia = "Console", CreatedOn=DateTime.Now });
         }
     }
 }

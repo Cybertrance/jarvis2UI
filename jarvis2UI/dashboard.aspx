@@ -157,7 +157,7 @@
               <div class="x_content">
                 <div class="dashboard-widget-content">
                   <ul class="list-unstyled timeline widget">
-                      <%foreach (jarvis2UI.Data_Model.SwarmProfile profile in jarvis2UI.Data_Model.SwarmProfileDataset.Profiles.Where(x => x.SwarmGroupName == "active_swarm"))
+                      <%foreach (jarvis2UI.Data_Model.SwarmProfile profile in ((jarvis2UI.Data_Model.SwarmProfileDataset)Application["SwarmProfileDataset"]).Profiles.Where(x => x.SwarmGroupName == "active_swarm"))
                           {%>
                     <li>
                       <div class="block">
@@ -204,7 +204,7 @@
                 <div class="dashboard-widget-content">
 
                   <ul class="list-unstyled timeline widget">
-                      <%foreach (jarvis2UI.Data_Model.SwarmProfile profile in jarvis2UI.Data_Model.SwarmProfileDataset.Profiles.Where(x => x.SwarmGroupName == "backlog_swarm"))
+                      <%foreach (jarvis2UI.Data_Model.SwarmProfile profile in ((jarvis2UI.Data_Model.SwarmProfileDataset)Application["SwarmProfileDataset"]).Profiles.Where(x => x.SwarmGroupName == "backlog_swarm"))
                           {%>
                     <li>
                       <div class="block">

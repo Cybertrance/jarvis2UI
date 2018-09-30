@@ -2,10 +2,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
-        <div class="col-md-9 col-sm-9 col-xs-9">
+        <div class="col-md-8 col-sm-8 col-xs-8">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2><i class="fa fa-align-left"></i>Active Tickets</h2>
+                    <h2><i class="fa fa-align-left"></i> Active Tickets</h2>
                     <button id='addTicketBtn' type="button" class="btn btn-success btn-lg pull-right"><i class="fa fa-plus"></i>&nbsp&nbsp&nbspAdd Ticket</button>
                     <div class="clearfix"></div>
                 </div>
@@ -39,7 +39,7 @@
                                                 <td>
                                                     <a><%=issue.Name %></a>
                                                     <br />
-                                                    <small>Created <%=issue.CreatedOn.Date %></small>
+                                                    <small>Created <%=issue.CreatedOn.Date.ToShortDateString() %></small>
                                                 </td>
                                                 <td>
                                                     <ul class="list-inline">
@@ -67,7 +67,16 @@
                                                     <small><%=issue.Progress %>% Complete</small>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-success btn-xs"><%=issue.Status %></button>
+                                                    <%  String button = "";
+                                                        if (issue.Progress > 26)
+                                                        {
+                                                            button = "btn-warning";
+                                                        }
+                                                        else
+                                                        {
+                                                            button = "btn-info";
+                                                        } %>
+                                                    <button type="button" class="btn <%=button %> btn-xs"><%=issue.Status %></button>
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary btn-xs ticket-open"><i class="fa fa-folder"></i>View </button>
@@ -109,7 +118,7 @@
                                                 <td>
                                                     <ul class="list-inline">
                                                         <li>
-                                                            <img src="images/user.png" class="avatar" alt="Avatar">
+                                                            Josh Waltons
                                                         </li>
                                                     </ul>
                                                 </td>
@@ -137,10 +146,7 @@
                                                 <td>
                                                     <ul class="list-inline">
                                                         <li>
-                                                            <img src="images/user.png" class="avatar" alt="Avatar">
-                                                        </li>
-                                                        <li>
-                                                            <img src="images/user.png" class="avatar" alt="Avatar">
+                                                           Adam Sandler
                                                         </li>
                                                     </ul>
                                                 </td>
@@ -170,7 +176,7 @@
         </div>
 
         <!-- Project Details panel-->
-        <div class="col-md-3 col-sm-3 col-xs-3">
+        <div class="col-md-4 col-sm-4 col-xs-4">
             <div class="x_panel">
                 <div class="x_title">
                     <h2 id="ticket-panel-title"><i class="fa fa-align-left"></i>Ticket Description</h2>
@@ -196,25 +202,19 @@
                     <div class="panel-body">
 
                         <p id="ticket-panel-desc">
-                            UI of the application feels sluggish and Unresponsive. Many hangs in the loading screen,
-											tickets page and orders page. Please fix ASAP. Attached are docs retlated to issue.
+                            Click "View" on a corresponding Ticket.
                         </p>
                         <br />
 
                         <div class="project_detail">
 
                             <p class="title">Raised by</p>
-                            <p id="ticket-panel-raisedby">Client Person #1</p>
+                            <p id="ticket-panel-raisedby"></p>
                             <p class="title">Raised via</p>
-                            <p id="ticket-panel-raisedvia">Chatbot</p>
+                            <p id="ticket-panel-raisedvia"></p>
                             <p class="title">Assigned To</p>
                             <p id="ticket-panel-assignedto">
-                                Agent #1
-                                <br>
-                                Agent #2
-                                <br>
-                                Agent #4
-                                <br>
+                                
                             </p>
                         </div>
 

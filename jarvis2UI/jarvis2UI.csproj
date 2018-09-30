@@ -123,7 +123,9 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="addTicketDetails.ashx" />
     <Content Include="getShiftDetails.ashx" />
+    <Content Include="AddTicketAssignee.ashx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="images\img.jpg" />
     <Content Include="profile_manager.aspx" />
     <Content Include="roster.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -3571,6 +3573,9 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddTicketAssignee.ashx.cs">
+      <DependentUpon>AddTicketAssignee.ashx</DependentUpon>
+    </Compile>
     <Compile Include="addTicketDetails.ashx.cs">
       <DependentUpon>addTicketDetails.ashx</DependentUpon>
     </Compile>
