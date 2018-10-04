@@ -297,28 +297,24 @@ function init_flot_chart() {
     if (typeof ($.plot) === 'undefined') { return; }
 
     console.log('init_flot_chart');
-	
-	if ($("#chart_plot_01").length) {
-                
-				
-				new PNotify({
-                    title: 'Please Wait',
-                    text: 'Processing data for ticket volume prediction',
-                    
-                    styling: 'bootstrap3',
-                    delay: 2000
-                });
-            }
-	
+
+    if ($("#chart_plot_01").length) {
+        new PNotify({
+            title: 'Please Wait',
+            text: 'Processing data for ticket volume prediction',
+
+            styling: 'bootstrap3',
+            delay: 2000
+        });
+    }
 
     $.ajax({
-        url: "http://127.0.0.1:9898/Jarvis_2_0/v1.0/getPredictions/volume",
+        //url: "http://127.0.0.1:9898/Jarvis_2_0/v1.0/getPredictions/volume",
+        //url: "http://0.0.0.0:9898/Jarvis_2_0/v1.0/getPredictions/volume",
+        url: "http://ec2-52-207-240-53.compute-1.amazonaws.com:9898/Jarvis_2_0/v1.0/getPredictions/volume",
         type: 'GET',
         contentType: "application/json",
         success: function (dataObj) {
-			
-			
-
             var arr_data2 = [];
 
             var stringObj = JSON.stringify(dataObj);
@@ -326,7 +322,6 @@ function init_flot_chart() {
             var parsedDataObj = JSON.parse(stringObj);
 
             for (i = 0; i < parsedDataObj.length; i++) {
-       
                 arr_data2.push([new Date(parsedDataObj[i]["Date"]).getTime(), parsedDataObj[i]["Volume"]]);
             }
 
@@ -339,18 +334,19 @@ function init_flot_chart() {
                 [gd(2017, 10, 17), 298],
                 [gd(2017, 11, 17), 268],
                 [gd(2017, 12, 17), 206],
-                [gd(2018, 0, 17), 275],
-                [gd(2018, 1, 17), 270],
-                [gd(2018, 2, 17), 238],
-                [gd(2018, 3, 17), 241],
-                [gd(2018, 5, 1), 245]
-                
+                [gd(2018, 1, 17), 275],
+                [gd(2018, 2, 17), 270],
+                [gd(2018, 3, 17), 238],
+                [gd(2018, 4, 17), 241],
+                [gd(2018, 5, 17), 245],
+                [gd(2018, 6, 17), 240],
+                [gd(2018, 7, 31), 201]
+                //[gd(2018, 7, 31), 195]
+
             ];
 
             var chart_plot_01_settings = {
-				
                 series: {
-					
                     lines: {
                         show: false,
                         fill: true
@@ -399,10 +395,10 @@ function init_flot_chart() {
                 console.log('Plot1');
 
                 $.plot($("#chart_plot_01"), [arr_data1, arr_data2], chart_plot_01_settings);
-				
-				new PNotify({
+
+                new PNotify({
                     title: 'Ticket Volume Forecast Available!',
-                    
+
                     type: 'success',
                     styling: 'bootstrap3',
                     delay: 2000
@@ -411,8 +407,6 @@ function init_flot_chart() {
         }
         //error: OnFail
     });
-
-    
 }
 
 function init_chart_doughnut() {
@@ -824,7 +818,6 @@ function init_compose() {
 /* CALENDAR */
 
 function init_calendar() {
-
     if (typeof ($.fn.fullCalendar) === 'undefined') { return; }
     console.log('init_calendar');
 
@@ -848,6 +841,11 @@ function init_calendar() {
                 success: function (data) {
                     var dataObj = JSON.parse(data);
 
+                    $("#roster-modal-status1").removeClass('green red');
+                    $("#roster-modal-status2").removeClass('green red');
+                    $("#roster-modal-status3").removeClass('green red');
+                    $("#roster-modal-status4").removeClass('green red');
+
                     var agent1 = dataObj[0].split("/");
                     var agent2 = dataObj[1].split("/");
                     var agent3 = dataObj[2].split("/");
@@ -859,8 +857,8 @@ function init_calendar() {
                         $("#roster-modal-status1").addClass('red');
                     }
                     else {
-                        $("#roster-modal-status4").removeClass('red');
-                        $("#roster-modal-status4").addClass('green');
+                        $("#roster-modal-status1").removeClass('red');
+                        $("#roster-modal-status1").addClass('green');
                     }
 
                     $("#roster-modal-name2").html(agent2[0]);
@@ -869,8 +867,8 @@ function init_calendar() {
                         $("#roster-modal-status2").addClass('red');
                     }
                     else {
-                        $("#roster-modal-status4").removeClass('red');
-                        $("#roster-modal-status4").addClass('green');
+                        $("#roster-modal-status2").removeClass('red');
+                        $("#roster-modal-status2").addClass('green');
                     }
 
                     $("#roster-modal-name3").html(agent3[0]);
@@ -879,8 +877,8 @@ function init_calendar() {
                         $("#roster-modal-status3").addClass('red');
                     }
                     else {
-                        $("#roster-modal-status4").removeClass('red');
-                        $("#roster-modal-status4").addClass('green');
+                        $("#roster-modal-status3").removeClass('red');
+                        $("#roster-modal-status3").addClass('green');
                     }
 
                     $("#roster-modal-name4").html(agent4[0]);
@@ -892,7 +890,6 @@ function init_calendar() {
                         $("#roster-modal-status4").removeClass('red');
                         $("#roster-modal-status4").addClass('green');
                     }
-                    
                 }
                 //error: OnFail
             });
@@ -901,43 +898,40 @@ function init_calendar() {
         },
         editable: false,
         dayRender: function (date, cell) {
-
         },
         eventTextColor: "rgb(38,38,38)",
         events: function (start, end, timezone, callback) {
-
             var startMoment = $.fullCalendar.moment(start);
             var endMoment = $.fullCalendar.moment(end);
             var sept = $.fullCalendar.moment("2018-09-29T05:55:03+05:30");
 
             var events = [];
 
-            while (startMoment.isAfter(sept ,'day') && (startMoment.isBefore(endMoment, 'day') || startMoment.isSame(endMoment, 'day'))) {
-                    // Create 3 events everyday for the 3 shifts.
-                    events.push(
-                        {
-                            // Shift 1 Event.
-                            title: "India Shift 1",
-                            start: startMoment.format(),
-                            backgroundColor: "rgb(198,224,180)",
-                            className: "roster-event"
-
-                        },
-                        {
-                            // Shift 2 Event.
-                            title: "India Shift 2",
-                            start: startMoment.format(),
-                            backgroundColor: "rgb(248,203,173)",
-                            className: "roster-event"
-                        },
-                        {
-                            // Shift 3 Event.
-                            title: "USA Shift",
-                            start: startMoment.format(),
-                            backgroundColor: "rgb(255,230,153)",
-                            className: "roster-event"
-                        }
-                    );             
+            while (startMoment.isAfter(sept, 'day') && (startMoment.isBefore(endMoment, 'day') || startMoment.isSame(endMoment, 'day'))) {
+                // Create 3 events everyday for the 3 shifts.
+                events.push(
+                    {
+                        // Shift 1 Event.
+                        title: "India Shift 1",
+                        start: startMoment.format(),
+                        backgroundColor: "rgb(198,224,180)",
+                        className: "roster-event"
+                    },
+                    {
+                        // Shift 2 Event.
+                        title: "India Shift 2",
+                        start: startMoment.format(),
+                        backgroundColor: "rgb(248,203,173)",
+                        className: "roster-event"
+                    },
+                    {
+                        // Shift 3 Event.
+                        title: "USA Shift",
+                        start: startMoment.format(),
+                        backgroundColor: "rgb(255,230,153)",
+                        className: "roster-event"
+                    }
+                );
                 startMoment.add(1, 'days');
             }
             if (callback) callback(events);
@@ -946,12 +940,16 @@ function init_calendar() {
 };
 
 function IsLeavePredicted(weekNo, shiftName, empId) {
-    
+    var isPredicted = false;
+
     for (i = 0; i < PREDICTEDLEAVE_STORE.length; i++) {
         if (PREDICTEDLEAVE_STORE[i].shiftName == shiftName && PREDICTEDLEAVE_STORE[i].weekNo == weekNo && PREDICTEDLEAVE_STORE[i].empId == empId) {
-            return true;
+            isPredicted = true;
+            break;
         }
     }
+
+    return isPredicted;
 }
 
 /* DATA TABLES */
@@ -1007,8 +1005,6 @@ function init_DataTables() {
     $('#datatable-keytable').DataTable({
         keys: true
     });
-
-    
 
     $('#datatable-scroller').DataTable({
         ajax: "js/datatables/json/scroller-demo.json",
@@ -1194,7 +1190,7 @@ $(document).ready(function () {
             data: { 'ticketId': $(this).closest("tr").attr('id') },
             success: function (data) {
                 var issueData = JSON.parse(data);
-               
+
                 $("#ticket-panel-title").html(issueData.Name);
                 $("#ticket-panel-desc").text(issueData.Description);
                 $("#ticket-panel-raisedby").text(issueData.RaisedBy);
@@ -1224,7 +1220,9 @@ $(document).ready(function () {
                 });
 
                 $.ajax({
-                    url: "http://127.0.0.1:9898/Jarvis_2_0/v1.0/getPredictions/defectCategory",
+                    //url: "http://127.0.0.1:9898/Jarvis_2_0/v1.0/getPredictions/defectCategory",
+                    //url: "http://0.0.0.0:9898/Jarvis_2_0/v1.0/getPredictions/defectCategory",
+                    url: "http://ec2-52-207-240-53.compute-1.amazonaws.com:9898/Jarvis_2_0/v1.0/getPredictions/defectCategory",
                     type: 'GET',
                     contentType: "application/json",
                     success: function (dataObj) {
@@ -1233,14 +1231,12 @@ $(document).ready(function () {
                             contentType: "application/json",
                             data: { 'issueNumber': issueNumber, 'team': dataObj[0]["Predicted Module"] },
                             success: function () {
-
                                 new PNotify({
                                     title: 'Ticket Assigned!',
                                     text: 'Ticket#' + issueNumber + ' assigned to a member of team ' + dataObj[0]["Predicted Module"],
                                     type: 'success',
                                     styling: 'bootstrap3',
                                     delay: 2000
-
                                 });
 
                                 setTimeout(function () { location.reload(true) }, 5000);
@@ -1270,48 +1266,38 @@ $(document).ready(function () {
 var PREDICTEDLEAVE_STORE = [];
 
 $(document).ready(function () {
-
     if ($('#calendar').length) {
-
         $.ajax({
-            url: "http://127.0.0.1:9898/Jarvis_2_0/v1.0/getPredictions/leaves",
-            type:'GET',
+            //url: "http://127.0.0.1:9898/Jarvis_2_0/v1.0/getPredictions/leaves",
+            //url: "http://0.0.0.0:9898/Jarvis_2_0/v1.0/getPredictions/leaves",
+            url: "http://ec2-52-207-240-53.compute-1.amazonaws.com:9898/Jarvis_2_0/v1.0/getPredictions/leaves",
+            type: 'GET',
             contentType: "application/json",
             success: function (dataObj) {
-
-              
-                for (i = 0; i < dataObj.length; i++) {
-
-                    if (dataObj[i].predicted == '1') {
-
-                        var weekNo = dataObj[i]["week"];
+                dataObj.forEach(function (dataElement) {
+                    if (dataElement.predicted == '1') {
+                        //var weekNo = dataElement.week;
 
                         $.ajax({
                             url: "getShiftDetails.ashx",
                             contentType: "application/json",
-                            data: { 'empId': dataObj[i]["Employee ID"], 'weekNo': dataObj[i].week },
+                            data: { 'empId': dataElement["Employee ID"], 'weekNo': dataElement.week },
                             success: function (shiftName) {
-
                                 var eventsToRed = $('#calendar').fullCalendar('clientEvents', function (evt) {
-                                    return evt.title == shiftName && $.fullCalendar.moment(evt.start).week() == weekNo;
+                                    return evt.title == shiftName && $.fullCalendar.moment(evt.start).week() == dataElement.week;
                                 });
 
                                 for (i = 0; i < eventsToRed.length; i++) {
-
                                     eventsToRed[i].className = 'roster-event-red-border';
                                     $('#calendar').fullCalendar('updateEvent', eventsToRed[i]);
-                                    
-
-                                    PREDICTEDLEAVE_STORE.push({ 'shiftName': shiftName, 'weekNo': weekNo, 'empId': dataObj[i]["Employee ID"] });
-
-                                    
                                 }
-                                
+
+                                PREDICTEDLEAVE_STORE.push({ 'shiftName': shiftName, 'weekNo': dataElement.week, 'empId': dataElement["Employee ID"] });
                             }
                             //error: OnFail
                         });
                     }
-                }
+                });
 
                 $('#calendar').fullCalendar('rerenderEvents');
                 new PNotify({
