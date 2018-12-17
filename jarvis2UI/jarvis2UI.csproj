@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="analysis.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -128,8 +129,10 @@
     <Content Include="addTicketDetails.ashx" />
     <Content Include="getShiftDetails.ashx" />
     <Content Include="AddTicketAssignee.ashx" />
+    <Content Include="GetIntent.ashx" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
+    <Content Include="RecieveFiles.ashx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="images\img.jpg" />
     <Content Include="profile_manager.aspx" />
@@ -3585,6 +3588,13 @@
     <Compile Include="addTicketDetails.ashx.cs">
       <DependentUpon>addTicketDetails.ashx</DependentUpon>
     </Compile>
+    <Compile Include="analysis.aspx.cs">
+      <DependentUpon>analysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="analysis.aspx.designer.cs">
+      <DependentUpon>analysis.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -3621,6 +3631,9 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GetIntent.ashx.cs">
+      <DependentUpon>GetIntent.ashx</DependentUpon>
+    </Compile>
     <Compile Include="getShiftDetails.ashx.cs">
       <DependentUpon>getShiftDetails.ashx</DependentUpon>
     </Compile>
@@ -3635,6 +3648,9 @@
       <DependentUpon>profile_manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecieveFiles.ashx.cs">
+      <DependentUpon>RecieveFiles.ashx</DependentUpon>
+    </Compile>
     <Compile Include="roster.aspx.cs">
       <DependentUpon>roster.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
