@@ -1341,14 +1341,12 @@ $(document).ready(function () {
     };
 });
 
-
 function onFileUploadSuccess(files, response) {
     clearAnalysisFeilds();
 
     var intent = 'drive_failure';
 
     if (files.length > 1) {
-
         for (var i = 0; i < files.length; i++) {
             if (files[i].type.match("image/jpg") || files[i].type.match("image/jpeg") || files[i].type.match("image/gif") || files[i].type.match("image/png") || files[i].type.match("image/bmp") || files[i].type.match("video/mp4") || files[i].type.match("video/flv") || files[i].type.match("video/wmv") || files[i].type.match("video/mkv")) {
                 if (files[i].type.match("video/mp4") || files[i].type.match("video/flv") || files[i].type.match("video/wmv") || files[i].type.match("video/mkv")) {
@@ -1361,120 +1359,154 @@ function onFileUploadSuccess(files, response) {
                 var formData = new FormData();
                 formData.append("file", files[i]);
 
-                var xhr = new XMLHttpRequest();
+                //var xhr = new XMLHttpRequest();
 
-                xhr.open("POST", 'http://10.207.142.34:5001/api/imageprocessor/receiveFile?sessionId=' + sessionid + "-" + username + '&intent=' + intent, true);
-                xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-                xhr.setRequestHeader("crossDomain", "true");
-                xhr.setRequestHeader("dataType", "jsonp");
-                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                //xhr.open("POST", 'http://10.207.142.34:5002/api/imageprocessor/receiveFile?sessionId=' + sessionid + "-" + username + '&intent=' + intent, true);
+                //xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+                //xhr.setRequestHeader("crossDomain", "true");
+                //xhr.setRequestHeader("dataType", "jsonp");
+                //xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
-                xhr.onreadystatechange = function () {
+                //xhr.onreadystatechange = function () {
+                //    if ((xhr.readyState == 4 && xhr.status == 200) || (xhr.readyState == 32 && xhr.status == 00)) {
+                //        var imageresponse = JSON.parse(xhr.responseText);
 
-                    if ((xhr.readyState == 4 && xhr.status == 200) || (xhr.readyState == 32 && xhr.status == 00)) {
-
-                        var imageresponse = JSON.parse(xhr.responseText);
-
-
-                        alert(imageresponse);
-
-                    }
-                    else {
-
-                        
-                                alert(xhr.responseText);
-                            
-
-                    }
-                };
-                
-                xhr.send(formData);
-
-                //$.ajax({
-                //    url: 'http://10.207.142.34:5001/api/imageprocessor/receiveFile?sessionId=' + sessionid + "-" + username + '&intent=' + intent,
-                //    data: formData,
-                //    type: 'POST',
-                //    contentType: false,
-                //    processData: false,
-                //    beforeSend: function (request) {
-                //        request.setRequestHeader("Access-Control-Allow-Origin", "*");
-                //        request.setRequestHeader("crossDomain", "true");
-                //        request.setRequestHeader("dataType", "jsonp");
-                //        request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-                //    },
-                    
-                //    success: function (response) {
-                //        alert(response);
-
-                //        var responseObj = JSON.parse(response);
-
-                //        $('#processedtext').value = responseObj.response_text;
-                //        $("#imgprocessedimage").attr("src", "http://10.207.142.34:5001/api/imageprocessor/getImage?fileName=" + responseObj.response_image + "&sessionId=" + sessionid + "-" + username);
-                //        $("#imgprocessedimage").show();
-
-                //        for (var j = 0; j < files.length; j++) {
-
-                //            if (files[j].type.match("text/plain")) {
-
-                //                var sessionid = "guestsessionid";
-                //                var username = "guest";
-                //                var drivelist = '0_0_0,0_0_1,0_0_12';
-                //                var producttype = "Unity";
-
-                //                if (responseObj.response_text != "") {
-                //                    drivelist = responseObj.response_text
-                //                }
-                               
-                //                $.ajax({
-                //                    url: 'http://10.207.142.32:5002' + '/upload?intent=' + intent + '&sessionId=' + sessionid + '-' + username + "&driveList=" + drivelist,
-                //                    data: formData,
-                //                    type: 'POST',
-                //                    contentType: false,
-                //                    processData: false,
-                //                    beforeSend: function (request) {
-                //                        request.setRequestHeader("Access-Control-Allow-Origin", "*");
-                //                        request.setRequestHeader("crossDomain", "true");
-                //                        request.setRequestHeader("dataType", "jsonp");
-                //                        request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-                //                    },
-                //                    success: function (response) {
-
-                //                        var logresponse = JSON.parse(response);
-
-                //                        $('#processedtext').value += logresponse.response_text;
-
-                //                        if ((logresponse.result.toString().search("Miniport_Slowness issue") >= 0 || logresponse.result.toString().search("failed due to") >= 0 || logresponse.result.toString().search("Unable to root cause") >= 0 || logresponse.result.toString().search("create service request") >= 0) && producttype != "") {
-
-                //                            $('#txtanalysisTicketTitle').text = "Log Analysis/Image Processing issue";
-                //                            $('#txtanalysisTicketDesc').value = logresponse.result.toString();
-                //                        }
-                //                    },
-                //                    error: function () {
-                //                        new PNotify({
-                //                            title: 'Error!',
-                //                            text: 'Could not contact log analysis',
-                //                            type: 'error',
-                //                            styling: 'bootstrap3',
-                //                            delay: 2000
-                //                        });
-                //                    }
-                //                });
-                //            }
-
-                //        }
-
-                //        $('#collapseTwo2').click();
-                //    },
-                //    error: function () {
-                //        new PNotify({
-                //            title: 'Error!',
-                //            text: 'Could not retrieve image from Image processor',
-                //            type: 'error',
-                //            styling: 'bootstrap3',
-                //            delay: 2000
-                //        });
+                //        alert(imageresponse);
                 //    }
-                //});
+                //    else {
+                //        alert(xhr.responseText);
+                //    }
+                //};
+
+                //xhr.send(formData);
+
+                $.ajax({
+                    url: 'https://10.207.142.34:5003/api/imageprocessor/receiveFile?sessionId=' + sessionid + "-" + username + '&intent=' + intent,
+                    //url: 'ProcessImageProcessingRequest.ashx?intent=' + intent,
+                    data: formData,
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function (request) {
+                        request.setRequestHeader("Access-Control-Allow-Origin", "*");
+                        request.setRequestHeader("crossDomain", "true");
+                        request.setRequestHeader("dataType", "jsonp");
+                        request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+                        new PNotify({
+                            title: 'Info',
+                            type: 'info',
+                            text: "Performing Image analysis. Please wait.",
+                            styling: 'bootstrap3',
+                            delay: 3000
+                        });
+                    },
+
+                    success: function (response) {
+                        var responseObj = JSON.parse(response);
+
+                        //$('#processedtext').value = responseObj.response_text;
+                        $("#imgprocessedimage").attr("src", "https://10.207.142.34:5003/api/imageprocessor/getImage?fileName=" + responseObj.response_image + "&sessionId=" + sessionid + "-" + username);
+                        $("#imgprocessedimageheader").show();
+                        $("#imgprocessedimage").show();
+
+                        new PNotify({
+                            title: 'Info',
+                            type: 'info',
+                            text: "Image Analysis complete, refer to the 'Recommendation Image' section ",
+                            styling: 'bootstrap3',
+                            delay: 3000
+                        });
+
+                        $('#headingTwo1')[0].click();
+
+                        for (var j = 0; j < files.length; j++) {
+                            if (files[j].type.match("text/plain")) {
+                                var sessionid = "guestsessionid";
+                                var username = "guest";
+                                var drivelist = '0_0_0,0_0_1,0_0_12';
+                                var producttype = "Unity";
+
+                                if (responseObj.response_text != "") {
+                                    drivelist = responseObj.response_text
+                                }
+
+                                $.ajax({
+                                    url: 'https://10.207.142.32:5002' + '/upload?intent=' + intent + '&sessionId=' + sessionid + '-' + username + "&driveList=" + drivelist,
+                                    data: formData,
+                                    type: 'POST',
+                                    contentType: false,
+                                    processData: false,
+                                    beforeSend: function (request) {
+                                        request.setRequestHeader("Access-Control-Allow-Origin", "*");
+                                        request.setRequestHeader("crossDomain", "true");
+                                        request.setRequestHeader("dataType", "jsonp");
+                                        request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+                                        new PNotify({
+                                            title: 'Info',
+                                            type: 'info',
+                                            text: "Performing Log Analysis. Please wait.",
+                                            styling: 'bootstrap3',
+                                            delay: 50000
+                                        });
+                                    },
+                                    success: function (response) {
+                                        var logresponse = JSON.parse(response);
+                                        PNotify.removeAll();                                        
+
+                                        if ((logresponse.result.toString().search("Miniport_Slowness issue") >= 0 || logresponse.result.toString().search("failed due to") >= 0) && producttype != "") {
+                                            $('#processedtext').show();
+                                            $('#processedtextheader').show();
+                                            $('#processedtext').val(logresponse.response_text);
+
+                                            $('#txtanalysisTicketTitle').val("Log Analysis/Image Processing issue");
+                                            $('#txtanalysisTicketDesc').val(logresponse.result.toString());
+
+                                            new PNotify({
+                                                title: 'Info',
+                                                text: "Log analysis succesful, please review the recommendations.",
+                                                type: 'success',
+                                                styling: 'bootstrap3',
+                                                delay: 2000
+                                            });
+                                            $("#headingTwo1")[0].click();
+                                        }
+                                        else if (logresponse.result.toString().search("Unable to root cause") >= 0 || logresponse.result.toString().search("create service request") >= 0) {
+                                            new PNotify({
+                                                title: 'Info',
+                                                text: logresponse.result.toString(),
+                                                styling: 'bootstrap3',
+                                                delay: 3000
+                                            });
+                                            $('#txtanalysisTicketTitle').val("Log Analysis/Image Processing issue: 'Drive Failure'");
+                                            $('#txtanalysisTicketDesc').val("Drive failure with drives: " + responseObj.response_text);
+                                            $('#headingTwo2')[0].click();
+                                        }
+                                    },
+                                    error: function () {
+                                        new PNotify({
+                                            title: 'Error!',
+                                            text: 'Could not contact log analysis',
+                                            type: 'error',
+                                            styling: 'bootstrap3',
+                                            delay: 2000
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    },
+                    error: function () {
+                        new PNotify({
+                            title: 'Error!',
+                            text: 'Could not retrieve image from Image processor',
+                            type: 'error',
+                            styling: 'bootstrap3',
+                            delay: 2000
+                        });
+                    }
+                });
             }
         }
     }
@@ -1499,17 +1531,52 @@ function onFileUploadSuccess(files, response) {
                     request.setRequestHeader("crossDomain", "true");
                     request.setRequestHeader("dataType", "jsonp");
                     request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+                    new PNotify({
+                        title: 'Info',
+                        type: 'info',
+                        text: "Performing Log Analysis. Please wait.",
+                        styling: 'bootstrap3',
+                        delay: 50000
+                    });
                 },
                 success: function (response) {
-                    alert();
                     var logresponse = JSON.parse(response);
+                    PNotify.removeAll();
+                    new PNotify({
+                        title: 'Info',
+                        text: "Log analysis succesful, please review the recommendations.",
+                        type: 'success',
+                        styling: 'bootstrap3',
+                        delay: 2000
+                    });
+                    $("#headingTwo1")[0].click();
 
                     $('#processedtext').value = logresponse.response_text;
 
-                    if ((logresponse.result.toString().search("Miniport_Slowness issue") >= 0 || logresponse.result.toString().search("failed due to") >= 0 || logresponse.result.toString().search("Unable to root cause") >= 0 || logresponse.result.toString().search("create service request") >= 0) && producttype != "") {
+                    if ((logresponse.result.toString().search("Miniport_Slowness issue") >= 0 || logresponse.result.toString().search("failed due to") >= 0) && producttype != "") {
+                        $('#txtanalysisTicketTitle').val("Log Analysis/Image Processing issue");
+                        $('#txtanalysisTicketDesc').val(logresponse.result.toString());
 
-                        $('#txtanalysisTicketTitle').text = "Log Analysis/Image Processing Issue";
-                        $('#txtanalysisTicketDesc').value = logresponse.result.toString();
+                        new PNotify({
+                            title: 'Info',
+                            text: "Log analysis succesful, please review the recommendations.",
+                            type: 'success',
+                            styling: 'bootstrap3',
+                            delay: 2000
+                        });
+                        $("#headingTwo1")[0].click();
+                    }
+                    else if (logresponse.result.toString().search("Unable to root cause") >= 0 || logresponse.result.toString().search("create service request") >= 0) {
+                        new PNotify({
+                            title: 'Info',
+                            text: logresponse.result.toString(),
+                            styling: 'bootstrap3',
+                            delay: 2000
+                        });
+                        $('#txtanalysisTicketTitle').val("Log Analysis/Image Processing issue: 'Drive Failure'");
+                        $('#txtanalysisTicketDesc').val("Drive failure with drives: " + responseObj.response_text);
+                        $('#headingTwo2')[0].click();
                     }
                 },
                 error: function () {
@@ -1529,11 +1596,11 @@ function onFileUploadSuccess(files, response) {
 $(document).ready(function () {
     $("#btnanalysisSubmitTicket").on('click', function () {
         var issueNumber;
-
+       
         $.ajax({
             url: "addTicketDetails.ashx",
             contentType: "application/json",
-            data: { 'title': $('#txtanalysisTicketTitle').val(), 'desc': $('#txtanalysisTicketTitleDesc').val() },
+            data: { 'title': $('#txtanalysisTicketTitle').val(), 'desc': $('#txtanalysisTicketDesc').val() },
             success: function (issueId) {
                 issueNumber = issueId;
 
@@ -1582,6 +1649,8 @@ $(document).ready(function () {
             //error: OnFail
         });
     });
+
+    clearAnalysisFeilds();
 });
 
 function clearAnalysisFeilds() {
